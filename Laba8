@@ -1,0 +1,233 @@
+using System;
+
+
+//namespace Laba8
+//{
+//    class Program
+//    {
+//        delegate double ArifmFunc(double x);
+//        //простые ф
+
+//        static double Coss(double x)
+//        {
+//            return Math.Cos(x);
+//        }
+//        static double B(double x)
+//        {
+//            return 2 * (Math.Sqrt(Math.Abs(x - 1))) + 1;
+//        }
+//        static double C(double x)
+//        {
+//            return -((x / (Math.PI) * (x / (Math.PI)) - 2.0 * x + 5.0 * Math.PI));
+//        }
+//        //меьод с параметрами делегата
+//        static void PrintFunc(double a, double b, double step, ArifmFunc del)
+//        {
+//            //  Console.WriteLine("\nзначения функции {3} на отрезке [{0},  {1}] c шагом {п/6}", a, b, step, del.Method.Name);
+//            for (double x = a; x <= b; x += step)
+//                Console.WriteLine("x={0}\t f(x)={1}", x, del(x));
+//        }
+//        static void Main(string[] args)
+//        {
+//            ArifmFunc Fdel;
+
+//            PrintFunc(-(Math.PI * 2.0), Math.PI * 2.0, Math.PI / 6.0, Math.Cos);
+//            Console.WriteLine("----------------------------------");
+
+//            Fdel = B;
+//            PrintFunc(-(Math.PI * 2.0), Math.PI * 2.0, Math.PI / 6.0, B);
+//            Console.WriteLine("----------------------------------");
+
+//            Fdel = x => -((x / (Math.PI) * (x / (Math.PI)) - 2.0 * x + 5.0 * Math.PI));
+//            PrintFunc(-(Math.PI * 2.0), Math.PI * 2.0, Math.PI / 6.0, Fdel);
+//            Console.WriteLine("----------------------------------");
+
+//        }
+
+//    }
+//}
+//прога с пунта б 
+//using System;
+
+//namespace Laba8
+//{
+//    class Program
+//    {
+//        static double Coss(double x)
+//        {
+//            return Math.Cos(x);
+//        }
+
+//        static double B(double x)
+//        {
+//            return 2 * (Math.Sqrt(Math.Abs(x - 1))) + 1;
+//        }
+
+//        static double C(double x)
+//        {
+//            return -((x / (Math.PI) * (x / (Math.PI)) - 2.0 * x + 5.0 * Math.PI));
+//        }
+
+//        static void PrintFunc(double a, double b, double step, Func<double, double> del)
+//        {
+//            for (double x = a; x <= b; x += step)
+//                Console.WriteLine("x={0}\t f(x)={1}", x, del(x));
+//        }
+
+//        static int TabulateFunc(double a, double b, double step, Func<double, double> del, Func<double, bool> predicate, out int negativeCount, out int betweenMinusOneAndOneCount)
+//        {
+//            int count = 0;
+//            negativeCount = 0;
+//            betweenMinusOneAndOneCount = 0;
+
+//            for (double x = a; x <= b; x += step)
+//            {
+//                double fx = del(x);
+//                Console.WriteLine("x={0}\t f(x)={1}", x, fx);
+
+//                if (predicate(fx))
+//                    count++;
+
+//                if (fx < 0)
+//                    negativeCount++;
+
+//                if (fx >= -1 && fx <= 1)
+//                    betweenMinusOneAndOneCount++;
+//            }
+
+//            return count;
+//        }
+
+//        static void Main(string[] args)
+//        {
+//            Func<double, double>[] funcs = { Math.Sin, Math.Cos, B, C };
+
+//            int totalPositiveCount = 0;
+//            int totalNegativeCount = 0;
+//            int totalBetweenMinusOneAndOneCount = 0;
+
+//            foreach (var func in funcs)
+//            {
+//                Console.WriteLine("Function: {0}", func.Method.Name);
+//                int positiveCount = TabulateFunc(-(Math.PI * 2.0), Math.PI * 2.0, Math.PI / 6.0, func, x => x > 0, out int negativeCount, out int betweenMinusOneAndOneCount);
+//                Console.WriteLine("Number of values satisfying the condition: {0}", positiveCount);
+//                Console.WriteLine("Number of negative values: {0}", negativeCount);
+//                Console.WriteLine("Number of values between -1 and 1: {0}", betweenMinusOneAndOneCount);
+//                Console.WriteLine("----------------------------------");
+
+//                totalPositiveCount += positiveCount;
+//                totalNegativeCount += negativeCount;
+//                totalBetweenMinusOneAndOneCount += betweenMinusOneAndOneCount;
+//            }
+
+//            Console.WriteLine("Total number of values satisfying the condition: {0}", totalPositiveCount);
+//            Console.WriteLine("Total number of negative values: {0}", totalNegativeCount);
+//            Console.WriteLine("Total number of values between -1 and 1: {0}", totalBetweenMinusOneAndOneCount);
+//        }
+//        static void FindMinMax(Func<double, double> del, double[] points, out double min, out double max)
+//        {
+//            min = double.MaxValue;
+//            max = double.MinValue;
+
+            
+//            foreach (var point in points)
+//            {
+//                double fx = del(point);
+//                if (fx < min)
+//                    min = fx;
+//                if (fx > max)
+//                    max = fx;
+//            }
+//            static void Main(string[] args)
+//            {
+//                Func<double, double>[] funcs = { Math.Sin, Math.Cos, B, C };
+//                Random rand = new Random();
+
+                
+//                double[] points = new double[10];
+//                for (int i = 0; i < points.Length; i++)
+//                {
+//                    points[i] = rand.NextDouble() * 20 - 10; // случайные точки в интервале [-10, 10]
+//                }
+
+//                foreach (var func in funcs)
+//                {
+//                    Console.WriteLine("Function: {0}", func.Method.Name);
+//                    FindMinMax(func, points, out double min, out double max);
+//                    Console.WriteLine("Minimum value: {0}", min);
+//                    Console.WriteLine("Maximum value: {0}", max);
+//                    Console.WriteLine("----------------------------------");
+//                }
+//            }
+//        }
+//    }
+//}
+//задание 2
+using System;
+using System.Linq;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string[] strings = { "Hello world", "Abc123", "Wine and dine", "1234567890", "madam", "This is a test string", "C# programming is fun", "Up-and-coming" };
+
+        // Подсчет строк без заглавных букв
+        int noUpperCount = strings.Count(s => !s.Any(char.IsUpper) && s.Any(c => (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')));
+
+        Console.WriteLine($"строк без заглавных букв: {noUpperCount}");
+
+        // Подсчет палиндромов в массиве
+        int palindromeCount = strings.Count(s => IsPalindrome(s));
+
+        Console.WriteLine($"палиндромов в массиве: {palindromeCount}");
+
+        // Подсчет 10-символьных строк
+        int tenCharCount = strings.Count(s => s.Length == 10);
+
+        Console.WriteLine($"Подсчет 10-символьных строк: {tenCharCount}");
+
+        // Подсчитайте слова из 5 букв
+        int fiveLetterCount = strings.SelectMany(s => s.Split(' ')).Count(w => w.Length == 5);
+
+        Console.WriteLine($"слова из 5 букв: {fiveLetterCount}");
+
+        // Слова на букву "W"
+        var wWords = strings.SelectMany(s => s.Split(' ')).Where(w => w.StartsWith("W"));
+
+        Console.WriteLine("Слова на букву \"W\":");
+        foreach (var word in wWords)
+        {
+            Console.WriteLine(word);
+        }
+
+        // Слова через дефис
+        var hyphenatedWords = strings.SelectMany(s => s.Split(' ')).Where(w => w.Contains("-"));
+
+        Console.WriteLine("Слова через дефис:");
+        foreach (var word in hyphenatedWords)
+        {
+            Console.WriteLine(word);
+        }
+    }
+
+    // Проверить, является ли строка палиндромом
+    static bool IsPalindrome(string s)
+    {
+        int i = 0;
+        int j = s.Length - 1;
+
+        while (i < j)
+        {
+            if (s[i] != s[j])
+            {
+                return false;
+            }
+
+            i++;
+            j--;
+        }
+
+        return true;
+    }
+}
